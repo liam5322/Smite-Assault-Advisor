@@ -1,26 +1,24 @@
-# Core dependencies (always required)
-mss==9.0.1                    # Fast screenshot capture
-numpy==1.24.3                 # Image processing
-opencv-python==4.8.1.78       # Image manipulation
-pillow==10.0.1                # Image handling
-pyyaml==6.0.1                 # Config files
-rapidfuzz==3.5.2              # Fuzzy string matching
-psutil==5.9.6                 # System monitoring
-requests==2.31.0              # HTTP requests
+# SMITE 2 Assault Brain - Optimized Production System
+# Minimal dependencies for maximum efficiency
 
-# UI dependencies
-pygetwindow==0.0.9            # Window management
+# Core system requirements
+numpy>=1.21.0                 # Image processing
+opencv-python>=4.5.0          # Computer vision
+pillow>=8.0.0                 # Image handling
+mss>=6.1.0                    # Fast screenshot capture
+pytesseract>=0.3.8            # OCR engine
+pyttsx3>=2.90                 # Text-to-speech
+requests>=2.25.0              # HTTP requests
 
-# OCR - Lightweight option (CPU-only)
-pytesseract==0.3.10           # Tesseract OCR wrapper
+# Async web scraping (for live data)
+aiohttp>=3.8.0                # Async HTTP client
+beautifulsoup4>=4.10.0        # HTML parsing
+lxml>=4.6.0                   # Fast XML parser
 
-# OCR - Advanced option (GPU-accelerated) - Optional
-# easyocr==1.7.0              # Advanced OCR (install separately for GPU systems)
-
-# Optional ML dependencies (for advanced features)
-# torch==2.1.0                # PyTorch (install separately)
-# transformers==4.35.0        # Hugging Face models (install separately)
-
-# Development dependencies
-pytest==7.4.3                # Testing
-black==23.11.0                # Code formatting
+# Built-in modules (no installation needed)
+# tkinter - GUI framework
+# sqlite3 - Database
+# asyncio - Async operations
+# json - Data serialization
+# threading - Background tasks
+# hashlib - Caching
