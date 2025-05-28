@@ -1,0 +1,1 @@
+"""UI components with smooth, thematic design"""

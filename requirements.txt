@@ -1,0 +1,26 @@
+# Core dependencies (always required)
+mss==9.0.1                    # Fast screenshot capture
+numpy==1.24.3                 # Image processing
+opencv-python==4.8.1.78       # Image manipulation
+pillow==10.0.1                # Image handling
+pyyaml==6.0.1                 # Config files
+rapidfuzz==3.5.2              # Fuzzy string matching
+psutil==5.9.6                 # System monitoring
+requests==2.31.0              # HTTP requests
+
+# UI dependencies
+pygetwindow==0.0.9            # Window management
+
+# OCR - Lightweight option (CPU-only)
+pytesseract==0.3.10           # Tesseract OCR wrapper
+
+# OCR - Advanced option (GPU-accelerated) - Optional
+# easyocr==1.7.0              # Advanced OCR (install separately for GPU systems)
+
+# Optional ML dependencies (for advanced features)
+# torch==2.1.0                # PyTorch (install separately)
+# transformers==4.35.0        # Hugging Face models (install separately)
+
+# Development dependencies
+pytest==7.4.3                # Testing
+black==23.11.0                # Code formatting
