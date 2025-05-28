@@ -1,0 +1,37 @@
+# SMITE 2 Assault Brain - Complete Dependencies
+
+# Core Analysis
+aiohttp>=3.8.0
+aiohttp-cors>=0.7.0
+beautifulsoup4>=4.11.0
+lxml>=4.9.0
+requests>=2.28.0
+psutil>=5.9.0
+
+# Screen Reading & OCR
+opencv-python>=4.8.0
+mss>=9.0.0
+pytesseract>=0.3.10
+Pillow>=9.5.0
+
+# Desktop Overlay & Input
+keyboard>=0.13.5
+pyttsx3>=2.90
+
+# Discord Integration
+discord.py>=2.3.0
+aiofiles>=23.0.0
+
+# Local LLM Support
+ollama>=0.1.0  # Optional: install manually from ollama.ai
+
+# Data Processing
+numpy>=1.24.0
+pandas>=2.0.0  # Optional: for advanced analytics
+
+# Development & Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+
+# Optional GPU Support
+# GPUtil>=1.4.0  # Uncomment for GPU detection

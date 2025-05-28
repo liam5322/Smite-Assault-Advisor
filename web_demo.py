@@ -19,6 +19,8 @@ import logging
 import sys
 sys.path.append('.')
 from optimized_assault_brain import SmartDataManager, MatchAnalysis
+from enhanced_items_scraper import EnhancedItemsScraper
+from smite2_gods_scraper import Smite2GodsDatabase
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -28,10 +30,19 @@ class WebAssaultBrain:
     
     def __init__(self):
         self.data_manager = SmartDataManager()
+        self.items_scraper = EnhancedItemsScraper()
+        self.gods_db = Smite2GodsDatabase()
         self.websockets = set()
         self.analysis_history = []
         
-        logger.info("✅ Web Assault Brain initialized")
+        # Initialize databases
+        items = self.items_scraper.create_comprehensive_database()
+        self.items_scraper.save_enhanced_items(items)
+        
+        gods = self.gods_db.create_smite2_gods_database()
+        self.gods_db.save_gods(gods)
+        
+        logger.info("✅ Web Assault Brain initialized with SMITE 2 gods and items databases")
     
     async def handle_index(self, request):
         """Serve main web interface"""
@@ -491,11 +502,38 @@ class WebAssaultBrain:
             if not team1 or not team2:
                 return web.json_response({'error': 'Both teams required'}, status=400)
             
+            # Validate SMITE 2 gods
+            invalid_gods = []
+            for god in team1 + team2:
+                if not self.gods_db.is_valid_god(god):
+                    invalid_gods.append(god)
+            
+            if invalid_gods:
+                valid_gods = self.gods_db.get_god_names()
+                return web.json_response({
+                    'error': f'❌ Invalid SMITE 2 gods: {", ".join(invalid_gods)}',
+                    'valid_gods': valid_gods[:10],  # Show first 10 as examples
+                    'total_gods': len(valid_gods),
+                    'suggestion': 'Please use only gods available in SMITE 2. Note: Scylla and Hel are not in SMITE 2.'
+                }, status=400)
+            
             logger.info(f"🔍 Web analysis: {team1} vs {team2}")
             
             # Perform analysis
             start_time = time.time()
             analysis = self.data_manager.quick_analyze(team1, team2)
+            
+            # Get enhanced item recommendations
+            recommended_items = self.items_scraper.get_assault_recommendations(team2, team1)
+            smart_item_priorities = [
+                f"🔥 {item.name} ({item.cost}g) - Priority {item.assault_priority}" 
+                for item in recommended_items[:3]
+            ]
+            
+            # Enhance analysis with real item data
+            if smart_item_priorities:
+                analysis.item_priorities = smart_item_priorities
+            
             analysis_time = (time.time() - start_time) * 1000
             
             # Convert to dict for JSON response
@@ -549,6 +587,17 @@ class WebAssaultBrain:
                             
                             if team1 and team2:
                                 analysis = self.data_manager.quick_analyze(team1, team2)
+                                
+                                # Get enhanced item recommendations
+                                recommended_items = self.items_scraper.get_assault_recommendations(team2, team1)
+                                smart_item_priorities = [
+                                    f"🔥 {item.name} ({item.cost}g) - Priority {item.assault_priority}" 
+                                    for item in recommended_items[:3]
+                                ]
+                                
+                                # Enhance analysis with real item data
+                                if smart_item_priorities:
+                                    analysis.item_priorities = smart_item_priorities
                                 
                                 response = {
                                     'type': 'analysis',
