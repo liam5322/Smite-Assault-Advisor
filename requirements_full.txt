@@ -16,6 +16,7 @@ Pillow>=9.5.0
 
 # Desktop Overlay & Input
 keyboard>=0.13.5
+mouse>=0.7.1
 pyttsx3>=2.90
 
 # Discord Integration
