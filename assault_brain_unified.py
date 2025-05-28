@@ -318,11 +318,52 @@ class UnifiedDataManager:
         
         self.items = {
             "meditation_cloak": ItemData(
-                name="Meditation Cloak", cost=500,
+                name="Meditation Cloak", cost=0,  # Auto-equipped in Assault
                 stats={"mp5": 7, "hp5": 7},
                 effectiveness=10,
                 counters=["Poke comps", "Mana pressure"],
-                notes="Essential for Assault sustain. Coordinate team usage."
+                notes="AUTO-EQUIPPED in Assault mode. Everyone gets this + 1 choice from: Beads, Aegis, Blink, Shell, Thorns"
+            ),
+            
+            # Second relic choices in Assault (most common)
+            "purification_beads": ItemData(
+                name="Purification Beads", cost=0,  # Free relic choice
+                stats={"cc_immunity": 2},
+                effectiveness=9,
+                counters=["CC heavy teams", "Ares", "Da Ji"],
+                notes="MOST POPULAR choice - cleanses CC and provides immunity. Essential vs heavy CC teams."
+            ),
+            
+            "aegis_amulet": ItemData(
+                name="Aegis Amulet", cost=0,  # Free relic choice
+                stats={"immunity": 2},
+                effectiveness=8,
+                counters=["Burst damage", "Ultimates", "Execute abilities"],
+                notes="2s invulnerability. Great vs burst mages and execute abilities like Thanatos ult."
+            ),
+            
+            "blink_rune": ItemData(
+                name="Blink Rune", cost=0,  # Free relic choice
+                stats={"teleport": 55},
+                effectiveness=7,
+                counters=["Positioning", "Initiation", "Escape"],
+                notes="Instant teleport 55 units. Good for tanks to initiate or squishies to escape."
+            ),
+            
+            "magic_shell": ItemData(
+                name="Magic Shell", cost=0,  # Free relic choice
+                stats={"team_shield": 100},
+                effectiveness=6,
+                counters=["AoE damage", "Team fights"],
+                notes="Team-wide shield. Less popular but can be good vs heavy AoE damage teams."
+            ),
+            
+            "thorns": ItemData(
+                name="Thorns", cost=0,  # Free relic choice
+                stats={"reflect_damage": 40},
+                effectiveness=5,
+                counters=["Auto-attack gods", "Hunters"],
+                notes="Reflects damage back. Situational pick vs heavy auto-attack teams."
             ),
             
             "divine_ruin": ItemData(
@@ -570,9 +611,20 @@ class UnifiedDataManager:
         """Suggest priority items"""
         priorities = []
         
-        # Check for healers
+        # Relic recommendations (Meditation auto-equipped + 1 choice)
         team2_names = [god.name.lower() for god in team2_data]
-        if any(name in ["hel", "aphrodite", "chang'e", "ra"] for name in team2_names):
+        cc_gods = ["ares", "da ji", "fenrir", "sobek", "ymir"]
+        burst_gods = ["scylla", "he bo", "vulcan", "thanatos"]
+        
+        if any(name in cc_gods for name in team2_names):
+            priorities.append("🔗 Take PURIFICATION BEADS - heavy CC team")
+        elif any(name in burst_gods for name in team2_names):
+            priorities.append("🛡️ Consider AEGIS AMULET - burst damage team")
+        else:
+            priorities.append("🔗 PURIFICATION BEADS recommended - safest choice")
+
+        # Check for healers
+        if any(name in ["hel", "aphrodite", "chang'e", "ra", "ix chel"] for name in team2_names):
             priorities.append("🩸 Rush Divine Ruin/Toxic Blade - counter their healing")
         
         # Check for stealth

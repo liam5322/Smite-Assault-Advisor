@@ -205,8 +205,20 @@ class SMITE2DataUpdater:
         current_items = {
             # Core Assault Items
             "meditation_cloak": {
-                "cost": 500, "category": "Relic", "popularity": 0.95, "effectiveness": 10,
-                "notes": "Essential Assault sustain relic"
+                "cost": 0, "category": "Relic", "popularity": 1.0, "effectiveness": 10,
+                "notes": "AUTO-EQUIPPED in Assault - everyone gets this + 1 choice from 5 relics"
+            },
+            "purification_beads": {
+                "cost": 0, "category": "Relic", "popularity": 0.65, "effectiveness": 9,
+                "notes": "Most popular second relic choice - cleanses CC and immunity"
+            },
+            "aegis_amulet": {
+                "cost": 0, "category": "Relic", "popularity": 0.25, "effectiveness": 8,
+                "notes": "2s invulnerability - great vs burst damage and executes"
+            },
+            "blink_rune": {
+                "cost": 0, "category": "Relic", "popularity": 0.08, "effectiveness": 7,
+                "notes": "Instant teleport for positioning and initiation"
             },
             "divine_ruin": {
                 "cost": 2300, "category": "Magical", "popularity": 0.85, "effectiveness": 9,
