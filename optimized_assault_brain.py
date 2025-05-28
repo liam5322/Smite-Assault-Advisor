@@ -106,7 +106,7 @@ class SmartDataManager:
                           "High single target burst",
                           "Useless in team fights"),
             
-            "hel": GodData("Hel", "Mage", 0.75, 5, 9, 9,
+            "aphrodite": GodData("Aphrodite", "Mage", 0.75, 5, 9, 9,
                          ["Divine Ruin", "Antiheal"],
                          "Team healing and sustain",
                          "Countered by antiheal"),
@@ -127,7 +127,7 @@ class SmartDataManager:
                           "Strong early game CC",
                           "Falls off late game"),
             
-            "scylla": GodData("Scylla", "Mage", 0.64, 4, 10, 9,
+            "kukulkan": GodData("Kukulkan", "Mage", 0.64, 4, 10, 9,
                             ["Early pressure", "Dive"],
                             "Incredible late game scaling",
                             "Weak early game"),
@@ -140,7 +140,12 @@ class SmartDataManager:
             "artemis": GodData("Artemis", "Hunter", 0.61, 5, 9, 8,
                              ["Early pressure", "No escape"],
                              "Highest DPS potential",
-                             "No mobility/escape")
+                             "No mobility/escape"),
+            
+            "sobek": GodData("Sobek", "Guardian", 0.66, 7, 7, 8,
+                           ["Beads", "Positioning"],
+                           "Strong initiation and peel",
+                           "Mana hungry early game")
         }
         
         # Store in database for persistence
