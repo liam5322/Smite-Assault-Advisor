@@ -1,0 +1,8 @@
+# Minimal dependencies for low-end systems
+mss==9.0.1                   # Fast screenshot
+numpy==1.24.3                # Basic arrays
+pillow==10.0.1               # Image handling
+pyyaml==6.0.1                # Config files
+rapidfuzz==3.5.2             # String matching
+psutil==5.9.6                # System info
+pytesseract==0.3.10          # Basic OCR

@@ -1,0 +1,91 @@
+{
+  "gods": [
+    "Achilles", "Agni", "Ah Muzen Cab", "Ah Puch", "Amaterasu", "Anhur",
+    "Anubis", "Ao Kuang", "Aphrodite", "Apollo", "Arachne", "Ares",
+    "Artemis", "Artio", "Athena", "Awilix", "Baba Yaga", "Bacchus",
+    "Bakasura", "Baron Samedi", "Bastet", "Bellona", "Cabrakan", "Camazotz",
+    "Cerberus", "Cernunnos", "Chaac", "Chang'e", "Chernobog", "Chiron",
+    "Chronos", "Cthulhu", "Cu Chulainn", "Cupid", "Da Ji", "Danzaburou",
+    "Discordia", "Erlang Shen", "Eset", "Fafnir", "Fenrir", "Freya",
+    "Ganesha", "Geb", "Gilgamesh", "Guan Yu", "Hachiman", "Hades",
+    "He Bo", "Heimdallr", "Hel", "Hera", "Hercules", "Horus",
+    "Hou Yi", "Hun Batz", "Izanami", "Janus", "Jing Wei", "Jormungandr",
+    "Kali", "Khepri", "King Arthur", "Kukulkan", "Kumbhakarna", "Kuzenbo",
+    "Loki", "Medusa", "Mercury", "Merlin", "Morgan Le Fay", "Mulan",
+    "Ne Zha", "Neith", "Nemesis", "Nike", "Nox", "Nu Wa",
+    "Odin", "Olorun", "Osiris", "Pele", "Persephone", "Poseidon",
+    "Ra", "Raijin", "Rama", "Ratatoskr", "Ravana", "Scylla",
+    "Serqet", "Set", "Shiva", "Skadi", "Sobek", "Sol",
+    "Sun Wukong", "Susano", "Sylvanus", "Terra", "Thanatos", "The Morrigan",
+    "Thor", "Thoth", "Tiamat", "Tsukuyomi", "Tyr", "Ullr",
+    "Vamana", "Vulcan", "Xbalanque", "Xing Tian", "Yemoja", "Ymir",
+    "Yu Huang", "Zeus", "Zhong Kui"
+  ],
+  "god_data": {
+    "Zeus": {
+      "name": "Zeus",
+      "role": "Mage",
+      "damage_type": "Magical",
+      "cc_score": 3,
+      "clear_score": 9,
+      "sustain_score": 2,
+      "mobility_score": 2,
+      "team_fight_score": 9,
+      "late_game_score": 8,
+      "difficulty": 3,
+      "meta_tier": "S"
+    },
+    "Ares": {
+      "name": "Ares",
+      "role": "Tank",
+      "damage_type": "Magical",
+      "cc_score": 10,
+      "clear_score": 4,
+      "sustain_score": 3,
+      "mobility_score": 3,
+      "team_fight_score": 9,
+      "late_game_score": 7,
+      "difficulty": 4,
+      "meta_tier": "S"
+    },
+    "Apollo": {
+      "name": "Apollo",
+      "role": "Hunter",
+      "damage_type": "Physical",
+      "cc_score": 4,
+      "clear_score": 8,
+      "sustain_score": 4,
+      "mobility_score": 8,
+      "team_fight_score": 7,
+      "late_game_score": 8,
+      "difficulty": 3,
+      "meta_tier": "A"
+    },
+    "Aphrodite": {
+      "name": "Aphrodite",
+      "role": "Support",
+      "damage_type": "Magical",
+      "cc_score": 4,
+      "clear_score": 5,
+      "sustain_score": 10,
+      "mobility_score": 4,
+      "team_fight_score": 6,
+      "late_game_score": 7,
+      "difficulty": 4,
+      "meta_tier": "A"
+    },
+    "Ymir": {
+      "name": "Ymir",
+      "role": "Tank",
+      "damage_type": "Magical",
+      "cc_score": 9,
+      "clear_score": 6,
+      "sustain_score": 4,
+      "mobility_score": 2,
+      "team_fight_score": 8,
+      "late_game_score": 6,
+      "difficulty": 3,
+      "meta_tier": "A"
+    }
+  }
+}

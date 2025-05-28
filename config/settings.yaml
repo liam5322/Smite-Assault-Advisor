@@ -1,0 +1,70 @@
+# SMITE 2 Assault Brain Configuration
+
+# Performance settings (auto-detected, can be overridden)
+performance_tier: "auto"  # auto, minimal, standard, maximum
+ocr_engine: "auto"        # auto, tesseract, easyocr
+gpu_acceleration: "auto"  # auto, true, false
+
+# Display settings
+monitor: 1                # Which monitor SMITE is on (1 = primary)
+theme: "divine_dark"      # divine_dark, celestial_light, pantheon_contrast
+overlay_position: "top-right"  # top-left, top-right, bottom-left, bottom-right
+overlay_opacity: 0.85
+overlay_scale: 1.0
+auto_hide_in_menu: true
+
+# Performance tuning
+update_rate: 1.0          # Seconds between updates (auto-adjusted)
+image_scale: 1.0          # Image scaling factor (auto-adjusted)
+max_threads: 4            # Max processing threads (auto-adjusted)
+cache_size: 100           # Cache size (auto-adjusted)
+
+# OCR settings
+ocr_confidence: 0.7       # Minimum confidence for OCR (0.0-1.0)
+fuzzy_match_threshold: 80 # Fuzzy matching threshold for god names
+
+# Game-specific settings
+resolution: "1920x1080"   # Adjust if different
+ocr_regions:
+  loading_team1:
+    x: 50
+    y: 200
+    width: 400
+    height: 600
+  loading_team2:
+    x: 1470
+    y: 200
+    width: 400
+    height: 600
+  loading_indicator:
+    x: 860
+    y: 50
+    width: 200
+    height: 100
+  tab_items:
+    x: 300
+    y: 200
+    width: 1320
+    height: 600
+
+# Features (auto-enabled based on hardware)
+features:
+  advanced_analysis: true
+  voice_output: false
+  ml_predictions: false
+  real_time_tracking: true
+  build_suggestions: true
+  team_analysis: true
+
+# Hotkeys
+hotkeys:
+  toggle_overlay: "F1"
+  force_scan: "F2"
+  cycle_position: "F3"
+  toggle_theme: "F4"
+  toggle_debug: "F5"
+
+# Advanced settings
+debug_mode: false
+save_screenshots: false
+log_level: "INFO"         # DEBUG, INFO, WARNING, ERROR

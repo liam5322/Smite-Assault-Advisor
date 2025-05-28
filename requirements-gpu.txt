@@ -1,0 +1,5 @@
+# GPU-accelerated dependencies (install only if GPU available)
+easyocr==1.7.0               # GPU-accelerated OCR
+torch==2.1.0                 # PyTorch with CUDA support
+torchvision==0.16.0          # Computer vision models
+transformers==4.35.0         # Advanced language models

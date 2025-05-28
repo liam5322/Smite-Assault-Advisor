@@ -1,0 +1,58 @@
+{
+  "items": {
+    "Divine Ruin": {
+      "type": "situational",
+      "cost": 2300,
+      "stats": ["Magical Power", "Magical Penetration"],
+      "passive": "Antiheal on ability damage",
+      "roles": ["Mage"],
+      "tier": 2,
+      "counters": ["healing"]
+    },
+    "Brawler's Beat Stick": {
+      "type": "situational",
+      "cost": 2350,
+      "stats": ["Physical Power", "Physical Penetration"],
+      "passive": "Antiheal on physical damage",
+      "roles": ["Hunter", "Assassin", "Warrior"],
+      "tier": 2,
+      "counters": ["healing"]
+    },
+    "Pestilence": {
+      "type": "situational",
+      "cost": 2250,
+      "stats": ["Health", "Magical Defense"],
+      "passive": "Aura - antiheal",
+      "roles": ["Tank"],
+      "tier": 2,
+      "counters": ["healing"]
+    },
+    "Purification Beads": {
+      "type": "relic",
+      "cost": 0,
+      "stats": [],
+      "passive": "CC immunity",
+      "roles": ["All"],
+      "tier": 1,
+      "counters": ["cc"]
+    },
+    "Aegis Amulet": {
+      "type": "relic",
+      "cost": 0,
+      "stats": [],
+      "passive": "Damage immunity",
+      "roles": ["All"],
+      "tier": 1,
+      "counters": ["burst"]
+    },
+    "Meditation Cloak": {
+      "type": "relic",
+      "cost": 0,
+      "stats": [],
+      "passive": "Heal and mana restore",
+      "roles": ["All"],
+      "tier": 1,
+      "counters": ["sustain"]
+    }
+  }
+}
