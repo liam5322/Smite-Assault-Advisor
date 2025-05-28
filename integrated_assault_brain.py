@@ -845,12 +845,39 @@ Voice System: {'Available' if self.voice_system else 'Not Available'}"""
         """Setup global hotkeys"""
         try:
             import keyboard
+            import mouse
+            
             hotkey = self.settings.get('hotkey', 'F1')
+            
+            # Clear existing hotkeys
             keyboard.clear_all_hotkeys()
-            keyboard.add_hotkey(hotkey.lower(), self.on_hotkey_pressed)
-            logger.info(f"Hotkey {hotkey} registered")
+            
+            # Handle mouse buttons
+            if hotkey.startswith('mouse_'):
+                mouse_button = hotkey.replace('mouse_', '')
+                if mouse_button in ['left', 'right', 'middle', 'x1', 'x2']:
+                    mouse.on_click(lambda: self.on_hotkey_pressed() if mouse.is_pressed(mouse_button) else None)
+                    logger.info(f"Mouse hotkey {hotkey} registered")
+                    return
+            
+            # Handle keyboard keys (including special combinations)
+            try:
+                keyboard.add_hotkey(hotkey, self.on_hotkey_pressed)
+                logger.info(f"Hotkey {hotkey} registered")
+            except ValueError:
+                # Try as a simple key
+                keyboard.add_hotkey(hotkey.lower(), self.on_hotkey_pressed)
+                logger.info(f"Hotkey {hotkey.lower()} registered")
+                
         except Exception as e:
             logger.error(f"Failed to register hotkey: {e}")
+            # Fallback to F1
+            try:
+                import keyboard
+                keyboard.add_hotkey('f1', self.on_hotkey_pressed)
+                logger.info("Fallback to F1 hotkey")
+            except:
+                pass
     
     def on_hotkey_pressed(self):
         """Handle hotkey press"""
@@ -1079,14 +1106,14 @@ class QuickAnalysisDialog(ctk.CTkToplevel):
             self.parent.tab_view.set("📊 Analysis")
 
 class HotkeyDialog(ctk.CTkToplevel):
-    """Dialog for changing hotkey"""
+    """Advanced dialog for changing hotkey - supports any key or mouse button"""
     
     def __init__(self, parent):
         super().__init__(parent)
         
         self.parent = parent
         self.title("Change Hotkey")
-        self.geometry("400x200")
+        self.geometry("500x400")
         self.resizable(False, False)
         
         # Center the dialog
@@ -1096,57 +1123,281 @@ class HotkeyDialog(ctk.CTkToplevel):
         y = (self.winfo_screenheight() // 2) - (self.winfo_height() // 2)
         self.geometry(f"+{x}+{y}")
         
+        self.listening = False
+        self.detected_key = None
+        
         self.create_widgets()
+        self.setup_listeners()
     
     def create_widgets(self):
         """Create dialog widgets"""
+        # Title
+        title_label = ctk.CTkLabel(
+            self,
+            text="🎮 Set Analysis Hotkey",
+            font=("Arial Black", 20),
+            text_color="#f39c12"
+        )
+        title_label.pack(pady=20)
+        
         # Instructions
         instruction_label = ctk.CTkLabel(
             self,
-            text="Press any key to set as hotkey",
+            text="Press any key, mouse button, or key combination",
             font=("Arial", 16),
             text_color="#95a5a6"
         )
-        instruction_label.pack(pady=30)
+        instruction_label.pack(pady=10)
+        
+        # Examples
+        examples_frame = ctk.CTkFrame(self, fg_color="#16213e", corner_radius=10)
+        examples_frame.pack(fill="x", padx=20, pady=10)
+        
+        examples_title = ctk.CTkLabel(
+            examples_frame,
+            text="Examples:",
+            font=("Arial", 14, "bold"),
+            text_color="#3498db"
+        )
+        examples_title.pack(pady=(15, 5))
+        
+        examples_text = """• Function Keys: F1, F2, F3... F12
+• Letters: A, B, C... Z
+• Numbers: 1, 2, 3... 0
+• Mouse Buttons: Left Click, Right Click, Middle Click
+• Combinations: Ctrl+F1, Alt+Q, Shift+Space
+• Special: Space, Tab, Insert, Delete, etc."""
+        
+        examples_label = ctk.CTkLabel(
+            examples_frame,
+            text=examples_text,
+            font=("Arial", 11),
+            text_color="#ecf0f1",
+            justify="left"
+        )
+        examples_label.pack(pady=(0, 15), padx=20)
         
         # Current key display
+        self.key_display_frame = ctk.CTkFrame(self, fg_color="#0f3460", corner_radius=15)
+        self.key_display_frame.pack(fill="x", padx=20, pady=20)
+        
         self.key_label = ctk.CTkLabel(
-            self,
-            text="Waiting for input...",
-            font=("Arial Black", 24),
+            self.key_display_frame,
+            text="Click 'Listen' then press your desired key...",
+            font=("Arial Black", 18),
             text_color="#f39c12"
         )
-        self.key_label.pack(pady=10)
+        self.key_label.pack(pady=20)
         
-        # Cancel button
+        # Buttons
+        button_frame = ctk.CTkFrame(self, fg_color="transparent")
+        button_frame.pack(pady=20)
+        
+        self.listen_btn = ctk.CTkButton(
+            button_frame,
+            text="🎧 Start Listening",
+            command=self.start_listening,
+            width=150,
+            height=40,
+            font=("Arial", 14, "bold"),
+            fg_color="#9b59b6",
+            hover_color="#8e44ad"
+        )
+        self.listen_btn.grid(row=0, column=0, padx=10)
+        
+        self.save_btn = ctk.CTkButton(
+            button_frame,
+            text="💾 Save",
+            command=self.save_hotkey,
+            width=150,
+            height=40,
+            font=("Arial", 14, "bold"),
+            fg_color="#27ae60",
+            hover_color="#229954",
+            state="disabled"
+        )
+        self.save_btn.grid(row=0, column=1, padx=10)
+        
         cancel_btn = ctk.CTkButton(
-            self,
+            button_frame,
             text="Cancel",
             command=self.destroy,
-            width=100,
-            height=35,
-            font=("Arial", 12, "bold"),
+            width=150,
+            height=40,
+            font=("Arial", 14, "bold"),
             fg_color="#7f8c8d",
             hover_color="#5d6d7e"
         )
-        cancel_btn.pack(pady=20)
+        cancel_btn.grid(row=0, column=2, padx=10)
+    
+    def setup_listeners(self):
+        """Setup keyboard and mouse listeners"""
+        try:
+            import keyboard
+            import mouse
+            
+            # Keyboard listener
+            keyboard.on_press(self.on_key_press)
+            
+            # Mouse listener
+            mouse.on_click(self.on_mouse_click)
+            
+        except Exception as e:
+            logger.error(f"Failed to setup listeners: {e}")
+    
+    def start_listening(self):
+        """Start listening for input"""
+        self.listening = True
+        self.detected_key = None
         
-        # Bind key press
-        self.bind("<KeyPress>", self.on_key_press)
-        self.focus_set()
+        self.listen_btn.configure(text="🔴 Listening...", state="disabled")
+        self.key_label.configure(text="Press any key or mouse button now...")
+        self.save_btn.configure(state="disabled")
+        
+        # Auto-stop listening after 10 seconds
+        self.after(10000, self.stop_listening)
+    
+    def stop_listening(self):
+        """Stop listening for input"""
+        self.listening = False
+        self.listen_btn.configure(text="🎧 Start Listening", state="normal")
+        
+        if not self.detected_key:
+            self.key_label.configure(text="No input detected. Try again.")
     
     def on_key_press(self, event):
-        """Handle key press"""
-        key = event.keysym
-        if key in ['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12']:
-            self.parent.settings['hotkey'] = key
+        """Handle keyboard input"""
+        if not self.listening:
+            return
+        
+        try:
+            # Get key name
+            key_name = event.name
+            
+            # Handle special keys
+            key_mapping = {
+                'space': 'Space',
+                'enter': 'Enter',
+                'tab': 'Tab',
+                'shift': 'Shift',
+                'ctrl': 'Ctrl',
+                'alt': 'Alt',
+                'esc': 'Escape',
+                'backspace': 'Backspace',
+                'delete': 'Delete',
+                'insert': 'Insert',
+                'home': 'Home',
+                'end': 'End',
+                'page up': 'Page Up',
+                'page down': 'Page Down',
+                'up': 'Up Arrow',
+                'down': 'Down Arrow',
+                'left': 'Left Arrow',
+                'right': 'Right Arrow'
+            }
+            
+            display_name = key_mapping.get(key_name.lower(), key_name.upper())
+            
+            # Check for modifiers
+            modifiers = []
+            import keyboard
+            if keyboard.is_pressed('ctrl'):
+                modifiers.append('Ctrl')
+            if keyboard.is_pressed('alt'):
+                modifiers.append('Alt')
+            if keyboard.is_pressed('shift'):
+                modifiers.append('Shift')
+            
+            # Build hotkey string
+            if modifiers and key_name.lower() not in ['ctrl', 'alt', 'shift']:
+                hotkey_string = '+'.join(modifiers + [key_name])
+                display_name = '+'.join(modifiers + [display_name])
+            else:
+                hotkey_string = key_name
+            
+            self.detected_key = hotkey_string
+            self.key_label.configure(text=f"Detected: {display_name}")
+            self.save_btn.configure(state="normal")
+            self.stop_listening()
+            
+        except Exception as e:
+            logger.error(f"Key press error: {e}")
+    
+    def on_mouse_click(self, x, y, button, pressed):
+        """Handle mouse input"""
+        if not self.listening or not pressed:
+            return
+        
+        try:
+            # Map mouse buttons
+            button_mapping = {
+                'Button.left': 'mouse_left',
+                'Button.right': 'mouse_right', 
+                'Button.middle': 'mouse_middle',
+                'Button.x1': 'mouse_x1',
+                'Button.x2': 'mouse_x2'
+            }
+            
+            button_str = str(button)
+            if button_str in button_mapping:
+                self.detected_key = button_mapping[button_str]
+                
+                display_mapping = {
+                    'mouse_left': 'Left Mouse Button',
+                    'mouse_right': 'Right Mouse Button',
+                    'mouse_middle': 'Middle Mouse Button',
+                    'mouse_x1': 'Mouse Button 4',
+                    'mouse_x2': 'Mouse Button 5'
+                }
+                
+                display_name = display_mapping.get(self.detected_key, self.detected_key)
+                self.key_label.configure(text=f"Detected: {display_name}")
+                self.save_btn.configure(state="normal")
+                self.stop_listening()
+                
+        except Exception as e:
+            logger.error(f"Mouse click error: {e}")
+    
+    def save_hotkey(self):
+        """Save the detected hotkey"""
+        if not self.detected_key:
+            messagebox.showwarning("No Key", "No key was detected. Please try again.")
+            return
+        
+        try:
+            # Test the hotkey first
+            self.parent.settings['hotkey'] = self.detected_key
             self.parent.save_settings()
-            self.parent.hotkey_button.configure(text=key)
+            self.parent.hotkey_button.configure(text=self.detected_key)
             self.parent.setup_hotkeys()
-            messagebox.showinfo("Success", f"Hotkey changed to {key}")
+            
+            # Show success message
+            display_mapping = {
+                'mouse_left': 'Left Mouse Button',
+                'mouse_right': 'Right Mouse Button',
+                'mouse_middle': 'Middle Mouse Button',
+                'mouse_x1': 'Mouse Button 4',
+                'mouse_x2': 'Mouse Button 5'
+            }
+            
+            display_name = display_mapping.get(self.detected_key, self.detected_key)
+            messagebox.showinfo("Success", f"Hotkey changed to: {display_name}")
             self.destroy()
-        else:
-            self.key_label.configure(text=f"{key} - Use F1-F12 keys only")
+            
+        except Exception as e:
+            logger.error(f"Failed to save hotkey: {e}")
+            messagebox.showerror("Error", f"Failed to set hotkey: {str(e)}")
+    
+    def destroy(self):
+        """Clean up listeners when closing"""
+        try:
+            import keyboard
+            import mouse
+            keyboard.unhook_all()
+            # Note: mouse.unhook_all() doesn't exist, listeners are automatically cleaned up
+        except:
+            pass
+        super().destroy()
 
 if __name__ == "__main__":
     # Check if another instance is running
