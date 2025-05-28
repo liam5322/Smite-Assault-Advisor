@@ -1,0 +1,118 @@
+{
+  "items": [
+    {
+      "name": "Divine Ruin",
+      "type": "Magical Damage",
+      "tier": 3,
+      "cost": 2300,
+      "stats": {
+        "Magical Power": 90,
+        "Magical Penetration": 15,
+        "Cooldown Reduction": 10
+      },
+      "passive": "Enemy gods hit by your abilities have 40% reduced healing for 8s",
+      "active": "",
+      "meta_rating": "S+",
+      "win_rate": 0.75,
+      "pick_rate": 0.45,
+      "build_path": [
+        "Lost Artifact",
+        "Enchanted Ring",
+        "Divine Ruin"
+      ],
+      "categories": [
+        "Anti-heal",
+        "Magical Power",
+        "Penetration"
+      ]
+    },
+    {
+      "name": "Brawler's Beat Stick",
+      "type": "Physical Damage",
+      "tier": 3,
+      "cost": 2350,
+      "stats": {
+        "Physical Power": 40,
+        "Physical Penetration": 15,
+        "Cooldown Reduction": 20
+      },
+      "passive": "Enemy gods hit by your abilities have 40% reduced healing for 8s",
+      "active": "",
+      "meta_rating": "S",
+      "win_rate": 0.72,
+      "pick_rate": 0.38,
+      "build_path": [
+        "Heavy Hammer",
+        "Jotunn's Vigor",
+        "Brawler's Beat Stick"
+      ],
+      "categories": [
+        "Anti-heal",
+        "Physical Power",
+        "Penetration"
+      ]
+    },
+    {
+      "name": "Purification Beads",
+      "type": "Relic",
+      "tier": 1,
+      "cost": 0,
+      "stats": {},
+      "passive": "",
+      "active": "Removes crowd control effects and grants 2s of crowd control immunity. Cooldown: 160s",
+      "meta_rating": "S+",
+      "win_rate": 0.68,
+      "pick_rate": 0.85,
+      "build_path": [
+        "Purification Beads"
+      ],
+      "categories": [
+        "Utility",
+        "CC Immunity",
+        "Relic"
+      ]
+    },
+    {
+      "name": "Aegis Amulet",
+      "type": "Relic",
+      "tier": 1,
+      "cost": 0,
+      "stats": {},
+      "passive": "",
+      "active": "Grants 2s of damage immunity. Cooldown: 170s",
+      "meta_rating": "A+",
+      "win_rate": 0.65,
+      "pick_rate": 0.42,
+      "build_path": [
+        "Aegis Amulet"
+      ],
+      "categories": [
+        "Utility",
+        "Damage Immunity",
+        "Relic"
+      ]
+    },
+    {
+      "name": "Meditation Cloak",
+      "type": "Relic",
+      "tier": 1,
+      "cost": 0,
+      "stats": {},
+      "passive": "",
+      "active": "Restores 75% mana and 30% health to you and nearby allies. Cooldown: 120s",
+      "meta_rating": "A",
+      "win_rate": 0.7,
+      "pick_rate": 0.6,
+      "build_path": [
+        "Meditation Cloak"
+      ],
+      "categories": [
+        "Utility",
+        "Sustain",
+        "Relic",
+        "Assault Special"
+      ]
+    }
+  ],
+  "last_updated": 1748403389.061297
+}

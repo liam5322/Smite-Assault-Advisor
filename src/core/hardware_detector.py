@@ -64,7 +64,8 @@ class HardwareDetector:
         
     def _get_gpu_memory(self) -> float:
         """Get GPU memory in GB"""
-        if not self.system_info.get('gpu_available', False):
+        # Check if GPU is available first
+        if not self._detect_gpu():
             return 0.0
             
         try:

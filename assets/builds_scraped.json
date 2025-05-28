@@ -1,0 +1,59 @@
+{
+  "builds": [
+    {
+      "god": "Zeus",
+      "role": "Mage",
+      "items": [
+        "Archmage's Gem",
+        "Spear of Desolation",
+        "Divine Ruin",
+        "Soul Reaver",
+        "Rod of Tahuti",
+        "Obsidian Shard"
+      ],
+      "relics": [
+        "Purification Beads",
+        "Aegis Amulet"
+      ],
+      "skill_order": [
+        "2",
+        "1",
+        "4",
+        "2",
+        "3"
+      ],
+      "win_rate": 0.74,
+      "popularity": 0.68,
+      "patch": "10.1",
+      "author": "ProPlayer123"
+    },
+    {
+      "god": "Ymir",
+      "role": "Guardian",
+      "items": [
+        "Sentinel's Embrace",
+        "Sovereignty",
+        "Heartward Amulet",
+        "Spirit Robe",
+        "Mantle of Discord",
+        "Hide of the Nemean Lion"
+      ],
+      "relics": [
+        "Purification Beads",
+        "Shell"
+      ],
+      "skill_order": [
+        "2",
+        "3",
+        "4",
+        "2",
+        "1"
+      ],
+      "win_rate": 0.78,
+      "popularity": 0.55,
+      "patch": "10.1",
+      "author": "TankMaster"
+    }
+  ],
+  "last_updated": 1748403389.061297
+}

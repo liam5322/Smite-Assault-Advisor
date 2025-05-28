@@ -91,6 +91,10 @@ class ConfigManager:
         
     def _validate_config(self, config: Dict[str, Any]):
         """Validate configuration against current hardware"""
+        # Handle auto values
+        if config.get('performance_tier') == 'auto':
+            config['performance_tier'] = self.hardware_detector.recommended_tier.value
+            
         # Check if selected performance tier is viable
         tier = PerformanceTier(config.get('performance_tier', 'standard'))
         validation = self.hardware_detector.validate_dependencies(tier)

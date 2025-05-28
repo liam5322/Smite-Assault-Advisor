@@ -1,0 +1,23 @@
+{
+  "matches": [
+    {
+      "match_id": "12345",
+      "mode": "Assault",
+      "players": [
+        {
+          "name": "Player1",
+          "god": "Zeus",
+          "team": 1
+        },
+        {
+          "name": "Player2",
+          "god": "Ymir",
+          "team": 1
+        }
+      ],
+      "duration": "15:30",
+      "status": "in_progress"
+    }
+  ],
+  "last_updated": 1748403389.061297
+}

@@ -1,0 +1,47 @@
+{
+  "gods": [
+    {
+      "name": "Zeus",
+      "role": "Mage",
+      "damage_type": "Magical",
+      "difficulty": 3,
+      "meta_tier": "S",
+      "win_rate": 0.68,
+      "pick_rate": 0.15,
+      "ban_rate": 0.05,
+      "abilities": [
+        "Chain Lightning",
+        "Aegis Assault",
+        "Detonate Charge",
+        "Lightning Storm"
+      ],
+      "tags": [
+        "High Damage",
+        "Team Fight",
+        "Poke"
+      ]
+    },
+    {
+      "name": "Ymir",
+      "role": "Guardian",
+      "damage_type": "Magical",
+      "difficulty": 2,
+      "meta_tier": "A",
+      "win_rate": 0.72,
+      "pick_rate": 0.12,
+      "ban_rate": 0.02,
+      "abilities": [
+        "Ice Wall",
+        "Glacial Strike",
+        "Frost Breath",
+        "Shards of Ice"
+      ],
+      "tags": [
+        "Tank",
+        "CC",
+        "Initiation"
+      ]
+    }
+  ],
+  "last_updated": 1748403389.061297
+}
