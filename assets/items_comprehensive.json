@@ -1,0 +1,635 @@
+{
+  "metadata": {
+    "last_updated": "2025-05-28",
+    "version": "Open Beta 10",
+    "data_source": "Comprehensive SMITE 2 Assault Research",
+    "anti_heal_cap": "75%",
+    "starting_gold": 3000
+  },
+  "item_categories": {
+    "sustain": {
+      "description": "Items providing Health per 5 seconds (HP5), Mana per 5 seconds (MP5), Lifesteal, or direct healing",
+      "priority": "Highest - Critical due to inability to recall to base",
+      "items": [
+        "Amanita Charm", "Stone of Gaia", "Bloodforge", "Bancroft's Talon", 
+        "Mail of Renewal", "Yogi's Necklace", "Rod of Asclepius"
+      ]
+    },
+    "anti_heal": {
+      "description": "Items that reduce enemy healing effectiveness",
+      "priority": "Mandatory against healer compositions",
+      "items": [
+        "Divine Ruin", "Brawler's Ruin", "Pestilence", "Ruinous Ankh", "Contagion"
+      ]
+    },
+    "aura": {
+      "description": "Items providing beneficial effects to nearby allies or detrimental effects to enemies",
+      "priority": "High - Effective due to constant team proximity",
+      "items": [
+        "Sovereignty", "Heartward Amulet", "Gauntlet of Thebes", "Emperor's Armor", "Mystical Mail"
+      ]
+    },
+    "defensive": {
+      "description": "Items focused on Protections, Health, and Crowd Control Reduction",
+      "priority": "Essential for survival in constant teamfights",
+      "items": [
+        "Breastplate of Valor", "Genji's Guard", "Spirit Robe", "Prophetic Cloak", "Draconic Scale"
+      ]
+    },
+    "offensive": {
+      "description": "Items providing raw damage, Penetration, Attack Speed, and Critical Strike Chance",
+      "priority": "Secondary to sustain but necessary for damage output",
+      "items": [
+        "Rod of Tahuti", "Titan's Bane", "Obsidian Shard", "The Executioner", "Qin's Sais"
+      ]
+    }
+  },
+  "items": {
+    "Amanita Charm": {
+      "name": "Amanita Charm",
+      "tier": 3,
+      "cost": 2350,
+      "stats": {
+        "physical_protection": 15,
+        "magical_protection": 15,
+        "health": 300,
+        "hp5": 4
+      },
+      "active": {
+        "name": "Mushroom Healing",
+        "description": "Create a Mushroom that Heals allied gods within 6.4m for 2% HP every 0.5s. Lasts for 5s.",
+        "cooldown": 60,
+        "radius": "6.4m",
+        "duration": "5s",
+        "healing_per_tick": "2% HP every 0.5s"
+      },
+      "assault_priority": "Highest",
+      "assault_utility": "Team-wide healing active - essential for sustain",
+      "recommended_for": ["Guardians", "Warriors", "Support-oriented builds"],
+      "notes": "OB10: Tick frequency changed to 0.5s from 1s, heal reduced to 2% from 3.5%"
+    },
+    "Divine Ruin": {
+      "name": "Divine Ruin",
+      "tier": 3,
+      "cost": 2300,
+      "stats": {
+        "intelligence": 85
+      },
+      "passive": {
+        "name": "Anti-Heal + Chain Lightning",
+        "description": "Enemy gods hit by your basic attacks or abilities have 50% reduced healing for 6s and trigger a chain lightning, damaging the target and up to 4 nearby enemies for 40 damage + 7.5% of your Intelligence. This can only occur once every 20 seconds.",
+        "anti_heal": "50%",
+        "duration": "6s",
+        "chain_damage": "40 + 7.5% Intelligence",
+        "chain_targets": 4,
+        "chain_cooldown": "20s"
+      },
+      "assault_priority": "Mandatory vs healers",
+      "assault_utility": "Mage anti-heal with bonus poke damage",
+      "recommended_for": ["Mages", "Magical damage dealers"],
+      "notes": "OB10: Intelligence decreased from 105 to 85, new chain lightning passive added"
+    },
+    "Brawler's Ruin": {
+      "name": "Brawler's Ruin",
+      "tier": 3,
+      "cost": 2650,
+      "stats": {
+        "strength": 50
+      },
+      "passive": {
+        "name": "Anti-Heal + Team Buff",
+        "description": "Enemy gods hit by your basic attacks or abilities have 50% reduced healing for 6s. Getting a kill or assist on an enemy god creates a field around you that lasts 6s, providing allies within it 5 + 1 Per Level Strength and Intelligence.",
+        "anti_heal": "50%",
+        "duration": "6s",
+        "buff_field_duration": "6s",
+        "ally_buff": "5 + 1 Per Level Strength and Intelligence"
+      },
+      "assault_priority": "Mandatory vs healers",
+      "assault_utility": "Physical anti-heal with team buff on kills",
+      "recommended_for": ["Hunters", "Assassins", "Warriors"],
+      "notes": "OB10: Strength decreased from 65 to 50, new team buff passive added"
+    },
+    "Contagion": {
+      "name": "Contagion",
+      "tier": 3,
+      "cost": 2150,
+      "stats": {
+        "health": 400,
+        "hp5": 6
+      },
+      "active": {
+        "name": "AoE Anti-Heal",
+        "description": "Target a location causing any enemy Gods within to be debuffed with 75% reduced Healing for 6s. If an enemy uses an ability while afflicted, your cooldowns are reduced by 0.25s.",
+        "anti_heal": "75%",
+        "duration": "6s",
+        "cooldown": "45s",
+        "cdr_per_ability": "0.25s"
+      },
+      "assault_priority": "High vs healers",
+      "assault_utility": "Tank AoE anti-heal with CDR benefit",
+      "recommended_for": ["Guardians", "Warriors"],
+      "notes": "Released May 19 in OB10. Builds from Ruinous Venom + Olmec Blue + Engraved Guard + 850g"
+    },
+    "Ruinous Ankh": {
+      "name": "Ruinous Ankh",
+      "tier": 3,
+      "cost": "Varies by tier",
+      "stats": "Stats vary by tier",
+      "passive": {
+        "name": "Anti-Heal Aura",
+        "description": "Enemies within 4m have 40% reduced Healing. The anti-heal effect is increased by up to +50% at close range and decreases by up to -50% at maximum range.",
+        "base_anti_heal": "40%",
+        "max_anti_heal": "90% at close range",
+        "min_anti_heal": "20% at max range",
+        "radius": "4m"
+      },
+      "assault_priority": "High vs healers",
+      "assault_utility": "Tank anti-heal aura with range scaling",
+      "recommended_for": ["Guardians", "Warriors"],
+      "notes": "OB10: Passive effect shifted to range-based scaling"
+    },
+    "Stone of Gaia": {
+      "name": "Stone of Gaia",
+      "tier": 3,
+      "cost": "~2400g",
+      "stats": {
+        "health": 400,
+        "hp5": 25,
+        "mp5": 15
+      },
+      "passive": {
+        "name": "Personal Regeneration",
+        "description": "Exceptional personal HP regeneration for sustained presence in fights"
+      },
+      "assault_priority": "High",
+      "assault_utility": "Personal sustain for tanks and bruisers",
+      "recommended_for": ["Guardians", "Warriors", "Solo laners"],
+      "notes": "Core sustain item for frontline gods"
+    },
+    "Bloodforge": {
+      "name": "Bloodforge",
+      "tier": 3,
+      "cost": "~2600g",
+      "stats": {
+        "strength": 75,
+        "physical_lifesteal": 15
+      },
+      "passive": {
+        "name": "Immediate Lifesteal",
+        "description": "Physical lifesteal without stacking requirements - immediate sustain"
+      },
+      "assault_priority": "Mandatory for hunters",
+      "assault_utility": "Immediate lifesteal for physical damage dealers",
+      "recommended_for": ["Hunters", "Physical assassins"],
+      "notes": "Replaces banned Devourer's Gauntlet in assault"
+    },
+    "Bancroft's Talon": {
+      "name": "Bancroft's Talon",
+      "tier": 3,
+      "cost": "~2500g",
+      "stats": {
+        "intelligence": 100,
+        "magical_lifesteal": 12
+      },
+      "passive": {
+        "name": "Power Scaling Lifesteal",
+        "description": "Magical lifesteal with power scaling based on missing health"
+      },
+      "assault_priority": "Mandatory for mages",
+      "assault_utility": "Magical lifesteal with power scaling",
+      "recommended_for": ["Mages", "Magical damage dealers"],
+      "notes": "Core sustain item for magical gods"
+    },
+    "Mail of Renewal": {
+      "name": "Mail of Renewal",
+      "tier": 3,
+      "cost": "~2300g",
+      "stats": {
+        "health": 300,
+        "physical_protection": 40,
+        "cooldown_reduction": 10
+      },
+      "passive": {
+        "name": "Health/Mana on Kills",
+        "description": "Restores health and mana on kills and assists"
+      },
+      "assault_priority": "High",
+      "assault_utility": "Sustain through combat participation",
+      "recommended_for": ["Warriors", "Guardians"],
+      "notes": "Excellent for sustained teamfighting"
+    },
+    "Yogi's Necklace": {
+      "name": "Yogi's Necklace",
+      "tier": 3,
+      "cost": 2250,
+      "stats": {
+        "health": 400,
+        "mana": 250,
+        "hp5": 6,
+        "mp5": 6
+      },
+      "passive": {
+        "name": "Percentage Health Regen",
+        "description": "You heal 0.5% of your Maximum Health per second"
+      },
+      "assault_priority": "High",
+      "assault_utility": "Percentage-based health regeneration",
+      "recommended_for": ["High health gods", "Tanks"],
+      "notes": "Scales with maximum health"
+    },
+    "Rod of Asclepius": {
+      "name": "Rod of Asclepius",
+      "tier": 3,
+      "cost": 2450,
+      "stats": {
+        "intelligence": 55,
+        "health": 225,
+        "hp5": 3
+      },
+      "passive": {
+        "name": "Healing Amplification Aura",
+        "description": "Allies within 8.8m have 15% increased Healing"
+      },
+      "active": {
+        "name": "Anti-Heal Cleanse",
+        "description": "Remove and prevent all Anti Heal effects for 3s for all allies within 7m",
+        "cooldown": "90s",
+        "radius": "7m",
+        "duration": "3s"
+      },
+      "assault_priority": "High with healers",
+      "assault_utility": "Amplifies team healing and counters anti-heal",
+      "recommended_for": ["Healers", "Support mages"],
+      "notes": "Essential for healer compositions"
+    },
+    "Sovereignty": {
+      "name": "Sovereignty",
+      "tier": 3,
+      "cost": "~2100g",
+      "stats": {
+        "health": 250,
+        "physical_protection": 55
+      },
+      "aura": {
+        "name": "Physical Protection Aura",
+        "description": "Provides Physical Protection and HP5 to nearby allies",
+        "physical_protection": 30,
+        "hp5": 30,
+        "radius": "70 units"
+      },
+      "assault_priority": "High for tanks",
+      "assault_utility": "Team physical defense aura",
+      "recommended_for": ["Guardians", "Warriors"],
+      "notes": "Core aura item for team protection"
+    },
+    "Heartward Amulet": {
+      "name": "Heartward Amulet",
+      "tier": 3,
+      "cost": "~2050g",
+      "stats": {
+        "magical_protection": 45,
+        "health": 250,
+        "mana": 200
+      },
+      "aura": {
+        "name": "Magical Protection Aura",
+        "description": "Allied gods within 70 units have their Magical Protections increased by 15 and their MP5 increased by 30",
+        "magical_protection": 15,
+        "mp5": 30,
+        "radius": "70 units"
+      },
+      "assault_priority": "High for tanks",
+      "assault_utility": "Team magical defense aura",
+      "recommended_for": ["Guardians", "Warriors"],
+      "notes": "Core aura item for magical protection"
+    },
+    "Gauntlet of Thebes": {
+      "name": "Gauntlet of Thebes",
+      "tier": 3,
+      "cost": 2800,
+      "stats": {
+        "health": 200,
+        "mana": 150
+      },
+      "passive": {
+        "name": "Health Stacking",
+        "description": "Assists on a minion give 1 Stack and God kills and assists give 5 Stacks. Stacks provide 15 Max Health. Stacks up to 40 times. Evolves at max stacks: Provides an additional 200 Max Health.",
+        "health_per_stack": 15,
+        "max_stacks": 40,
+        "evolution_bonus": 200
+      },
+      "assault_priority": "High for tanks",
+      "assault_utility": "Health stacking for team aura",
+      "recommended_for": ["Guardians", "Warriors"],
+      "notes": "Provides health aura to allies when evolved"
+    },
+    "Emperor's Armor": {
+      "name": "Emperor's Armor",
+      "tier": 3,
+      "cost": "~2400g",
+      "stats": {
+        "physical_protection": 50,
+        "health": 300
+      },
+      "aura": {
+        "name": "Tower Protection",
+        "description": "Provides tower protection for diving scenarios"
+      },
+      "assault_priority": "Situational",
+      "assault_utility": "Tower diving protection",
+      "recommended_for": ["Guardians", "Dive-heavy compositions"],
+      "notes": "Useful for aggressive tower diving"
+    },
+    "Mystical Mail": {
+      "name": "Mystical Mail",
+      "tier": 3,
+      "cost": "~2700g",
+      "stats": {
+        "health": 300,
+        "physical_protection": 40
+      },
+      "passive": {
+        "name": "AoE Damage Aura",
+        "description": "Enemies within 4m are dealt 15 + 1 per level Magical Damage per second. Damage increases by up to +50% at close range and decreases by up to -50% at maximum range. Enemies take the full amount as bonus damage if they have a Health Shield.",
+        "base_damage": "15 + 1 per level",
+        "radius": "4m",
+        "damage_scaling": "±50% based on range"
+      },
+      "assault_priority": "High for tanks",
+      "assault_utility": "Constant AoE damage in teamfights",
+      "recommended_for": ["Guardians", "Warriors"],
+      "notes": "OB10: Added bonus damage vs shields"
+    },
+    "Rod of Tahuti": {
+      "name": "Rod of Tahuti",
+      "tier": 3,
+      "cost": 3000,
+      "stats": {
+        "intelligence": 85,
+        "mana": 250,
+        "mp5": 2
+      },
+      "passive": {
+        "name": "Intelligence Amplification",
+        "description": "Gain additional Intelligence equal to 25% of your Intelligence from items"
+      },
+      "assault_priority": "High for mages",
+      "assault_utility": "Major power spike for magical damage",
+      "recommended_for": ["Mages", "Magical damage dealers"],
+      "notes": "Core late-game power item"
+    },
+    "Titan's Bane": {
+      "name": "Titan's Bane",
+      "tier": 3,
+      "cost": 3100,
+      "stats": {
+        "strength": 45
+      },
+      "passive": {
+        "name": "Shattering",
+        "description": "You gain the Shattering effect, granting you 35% Physical and Magical Penetration. This effect does not stack with itself.",
+        "penetration": "35% Physical and Magical"
+      },
+      "assault_priority": "High for physical damage",
+      "assault_utility": "Percentage penetration for tanks",
+      "recommended_for": ["Hunters", "Physical assassins", "Warriors"],
+      "notes": "Essential vs high protection targets"
+    },
+    "Obsidian Shard": {
+      "name": "Obsidian Shard",
+      "tier": 3,
+      "cost": "~2450g",
+      "stats": {
+        "intelligence": 60
+      },
+      "passive": {
+        "name": "Shattering",
+        "description": "You gain the Shattering effect, granting you 35% Physical and Magical Penetration. This effect does not stack with itself.",
+        "penetration": "35% Physical and Magical"
+      },
+      "assault_priority": "High for mages",
+      "assault_utility": "Percentage penetration for tanks",
+      "recommended_for": ["Mages", "Magical damage dealers"],
+      "notes": "Essential vs high protection targets"
+    },
+    "The Executioner": {
+      "name": "The Executioner",
+      "tier": 3,
+      "cost": "~2400g",
+      "stats": {
+        "attack_speed": 15
+      },
+      "passive": {
+        "name": "Hybrid Power",
+        "description": "You gain 40 Strength or 70 Intelligence depending on which stat from items is higher"
+      },
+      "assault_priority": "High for hunters",
+      "assault_utility": "Hybrid power and attack speed",
+      "recommended_for": ["Hunters", "Auto-attack focused gods"],
+      "notes": "Adapts to your build's primary stat"
+    },
+    "Qin's Sais": {
+      "name": "Qin's Sais",
+      "tier": 3,
+      "cost": 2600,
+      "stats": {
+        "attack_speed": 25
+      },
+      "passive": {
+        "name": "Max Health Damage",
+        "description": "On Basic Attack hits, deal Physical Damage equal to 1.5% of the target's maximum Health. If the target has over 2000 Health, your basic attack bonus damage scales up, capping at 6% max Health on 2750 HP targets. This only affects gods.",
+        "base_damage": "1.5% max health",
+        "scaling_threshold": "2000 HP",
+        "max_damage": "6% max health at 2750 HP"
+      },
+      "assault_priority": "High vs tanks",
+      "assault_utility": "Anti-tank hunter item",
+      "recommended_for": ["Hunters", "Auto-attack gods"],
+      "notes": "Essential vs high health targets"
+    },
+    "Book of Thoth": {
+      "name": "Book of Thoth",
+      "tier": 3,
+      "cost": 2300,
+      "stats": {
+        "intelligence": 30,
+        "mana": 350,
+        "mp5": 4
+      },
+      "passive": {
+        "name": "Mana Stacking",
+        "description": "Permanently gain 10 Mana per Stack (1 Stack per 900 Damage Dealt to minions/Jungle Monsters, God damage counts double). Gain INT equal to 4% of Mana from items. Evolves at 50 stacks: Gain +20 INT, +100 Mana, and increases INT gained from Mana to 6%.",
+        "mana_per_stack": 10,
+        "int_from_mana": "4% (6% when evolved)",
+        "evolution_threshold": 50,
+        "evolution_bonus": "+20 INT, +100 Mana"
+      },
+      "assault_priority": "High for mages",
+      "assault_utility": "Mage sustain and scaling power",
+      "recommended_for": ["Mages", "Mana-hungry gods"],
+      "notes": "Core stacking item for magical gods"
+    },
+    "Prophetic Cloak": {
+      "name": "Prophetic Cloak",
+      "tier": 3,
+      "cost": 2400,
+      "stats": {
+        "physical_protection": 22,
+        "magical_protection": 22,
+        "cooldown_reduction": 10
+      },
+      "passive": {
+        "name": "Protection Stacking",
+        "description": "Once every 5s, when you damage an enemy god, gain a stack of 1 Protection (corresponding to damage type dealt by god). Evolves at 20 stacks of both Protections: Gain additional 5 Protections and 6% Damage Mitigation, or 12% Damage Mitigation if total Protection exceeds 300.",
+        "protection_per_stack": 1,
+        "max_stacks": 20,
+        "evolution_mitigation": "6% (12% if 300+ total protections)"
+      },
+      "assault_priority": "High for tanks",
+      "assault_utility": "Tank stacking defense",
+      "recommended_for": ["Guardians", "Warriors"],
+      "notes": "OB10: Fixed 6% mitigation bug"
+    },
+    "Draconic Scale": {
+      "name": "Draconic Scale",
+      "tier": 3,
+      "cost": 2700,
+      "stats": {
+        "health": 300,
+        "physical_protection": 20,
+        "magical_protection": 20
+      },
+      "passive": {
+        "name": "Adaptive Protection Stacking",
+        "description": "Each time you take damage from a God, gain 1 + 2% Bonus Protections against that damage type. Stacks last for 1.5s with a maximum of 10 stacks. Stacks decay by 1 rather than being fully removed.",
+        "protection_per_stack": "1 + 2% Bonus Protections",
+        "max_stacks": 10,
+        "stack_duration": "1.5s"
+      },
+      "assault_priority": "High for tanks",
+      "assault_utility": "Adaptive stacking defense",
+      "recommended_for": ["Guardians", "Warriors"],
+      "notes": "Released May 26 in OB10. Builds from Veve Charm and Stalwart Sigil + 750g"
+    },
+    "Chronos' Pendant": {
+      "name": "Chronos' Pendant",
+      "tier": 3,
+      "cost": "~2500g",
+      "stats": {
+        "intelligence": 55,
+        "cooldown_reduction": 25
+      },
+      "passive": {
+        "name": "Cooldown Reduction",
+        "description": "Your ability cooldowns are reduced by 1s every 10s"
+      },
+      "assault_priority": "High for mages",
+      "assault_utility": "CDR and utility for ability-based gods",
+      "recommended_for": ["Mages", "Ability-based gods"],
+      "notes": "Core CDR item for magical gods"
+    },
+    "Soul Gem": {
+      "name": "Soul Gem",
+      "tier": 3,
+      "cost": "~2400g",
+      "stats": {
+        "intelligence": 40,
+        "magical_lifesteal": 10,
+        "cooldown_reduction": 10
+      },
+      "passive": {
+        "name": "Burst and Sustain",
+        "description": "On successful hit of an Ability you gain 1 stack. At 3 Stacks your next Ability that damages an enemy God will deal bonus damage equal to 40% of your Intelligence to each God hit, and will heal yourself and allies within 3.2m for 5 +10 Per Level and will consume the 3 stacks.",
+        "stacks_required": 3,
+        "bonus_damage": "40% Intelligence",
+        "healing": "5 + 10 per level",
+        "healing_radius": "3.2m"
+      },
+      "assault_priority": "High for mages",
+      "assault_utility": "Burst damage and team healing",
+      "recommended_for": ["Mages", "Burst-oriented gods"],
+      "notes": "Combines damage and sustain utility"
+    },
+    "Blink Rune": {
+      "name": "Blink Rune",
+      "tier": "Relic",
+      "cost": 0,
+      "stats": {},
+      "active": {
+        "name": "Teleport",
+        "description": "Teleport to a targeted location up to 5.6m away. Can be used while firing another ability. Cannot be activated for 3s upon dealing damage to a god or taking damage from a god. Damaging or Killing an enemy god within 4s of use reduces the cooldown by 30s.",
+        "range": "5.6m",
+        "cooldown": "180s",
+        "combat_lockout": "3s",
+        "cdr_on_god_damage": "30s"
+      },
+      "assault_priority": "High for initiators",
+      "assault_utility": "Initiation and escape tool",
+      "recommended_for": ["Guardians", "Initiators"],
+      "notes": "Essential for engage-heavy compositions"
+    }
+  },
+  "build_templates": {
+    "guardian_tank": {
+      "description": "Core tank build focusing on team utility and sustain",
+      "priority_order": [
+        "Amanita Charm",
+        "Defensive boots",
+        "Breastplate/Genji's (CDR + protections)",
+        "Sovereignty/Heartward (team auras)",
+        "Stone of Gaia (regeneration)",
+        "Situational defense/utility"
+      ],
+      "key_stats": ["Health", "Protections", "CDR", "Aura effects"],
+      "notes": "Focus on team-wide benefits through aura items"
+    },
+    "hunter_no_stacking": {
+      "description": "Hunter build without stacking items (assault restriction)",
+      "priority_order": [
+        "Bloodforge (immediate lifesteal)",
+        "Ninja Tabi (attack speed)",
+        "Asi (lifesteal + penetration)",
+        "Executioner/Qin's Sais",
+        "Wind Demon (crit)",
+        "Deathbringer/Titan's Bane"
+      ],
+      "key_stats": ["Lifesteal", "Attack Speed", "Crit", "Penetration"],
+      "notes": "Prioritize immediate power over stacking mechanics"
+    },
+    "mage_sustain": {
+      "description": "Mage build prioritizing sustain and utility",
+      "priority_order": [
+        "Sands of Time/Vampiric Shroud",
+        "Shoes of Focus (CDR)",
+        "Bancroft's Talon (lifesteal)",
+        "Rod of Tahuti (power)",
+        "Divine Ruin (anti-heal)",
+        "Soul Reaver/protections"
+      ],
+      "key_stats": ["Lifesteal", "CDR", "Power", "Penetration"],
+      "notes": "Balance damage output with survivability"
+    },
+    "warrior_hybrid": {
+      "description": "Warrior build balancing offense and defense",
+      "priority_order": [
+        "Warrior Tabi",
+        "Gladiator's Shield (hybrid)",
+        "Breastplate of Valor (CDR)",
+        "Shifter's Shield (adaptive)",
+        "Spirit Robe (CCR + mitigation)",
+        "Situational offense/defense"
+      ],
+      "key_stats": ["Hybrid Power/Defense", "CDR", "CCR"],
+      "notes": "Adapt build based on team needs and enemy composition"
+    }
+  },
+  "assault_specific_notes": {
+    "starting_gold": "3,000 gold enables immediate Tier 2 or Tier 3 purchases",
+    "no_backing": "Cannot return to base except through death - sustain is critical",
+    "stacking_banned": "Most stacking items are banned or ineffective",
+    "anti_heal_mandatory": "Anti-heal items become mandatory against healer compositions",
+    "aura_effectiveness": "Aura items highly effective due to constant team proximity",
+    "lifesteal_priority": "Lifesteal mandatory for all damage dealers",
+    "team_utility": "Items with team-wide benefits prioritized over individual power"
+  }
+}
